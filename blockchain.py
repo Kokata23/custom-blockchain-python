@@ -15,7 +15,6 @@ def start_mining(miner, block, e, sh, q):
     if mining and not sh:
         sh.append(mining)
         q.put(miner.miner_address)
-        # miner.rewards += 1 TODO NOT WORKING NEED UPDATING THE REWARD LOGIC BECAUSE OF THE MULTIPROCCESING
 
 
 
@@ -31,8 +30,6 @@ class Blockchain:
 
 
     def add_block(self, block):
-        if self.blockchain:
-            block.pr_hash = self.blockchain[-1].hash
         self.blockchain.append(block)
 
 
@@ -69,7 +66,9 @@ if __name__ == '__main__':
                 break
 
         block = Block(block_made, bl.transactions)
-        # start_mining(bl.miners[0], block, bl.shared_winner)
+        if bl.blockchain:                              
+            block.pr_hash = bl.blockchain[-1].hash  
+
         e = multiprocessing.Event()
         bl.proccesses = [multiprocessing.Process(target=start_mining, args=(bl.miners[el], block, e, bl.shared_winner, bl.queen)) for el in range(len(bl.miners))]
 
