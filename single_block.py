@@ -33,5 +33,5 @@ class Block:
 
     
     def __str__(self):
-        return f'Block N:{self.index}\n date: {self.date}\n nounce:{self.nounce}\n pr_hash:{self.pr_hash}\n hash:{self.hash}'
+        return f'Block N:{self.index}\n tansaction_values: {self.date}\n nounce:{self.nounce}\n pr_hash:{self.pr_hash}\n hash:{self.hash}'
 
